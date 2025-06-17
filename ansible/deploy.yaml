@@ -1,25 +1,41 @@
-- name: Deploy Flask App to Minikube
+- name: Deploy Flask App to Minikube and Push to Docker Hub
   hosts: minikube
   become: yes
+  vars:
+    dockerhub_username: "priyam930"
+    dockerhub_password: "Priy@m930"
+    dockerhub_image: "priyam930/flask-app:latest"
+
   tasks:
     - name: Copy application code
       copy:
         src: ../flask-app/
         dest: /home/ubuntu/flask-app/
 
+    - name: Docker Login to Docker Hub
+      shell: echo "{{ dockerhub_password }}" | docker login -u "{{ dockerhub_username }}" --password-stdin
+      args:
+        executable: /bin/bash
+
     - name: Build Docker Image
       shell: |
         eval $(minikube docker-env)
         cd /home/ubuntu/flask-app
-        docker build -t flask-app:latest .
+        docker build -t {{ dockerhub_image }} .
+      args:
+        executable: /bin/bash
+
+    - name: Push Docker Image to Docker Hub
+      shell: |
+        eval $(minikube docker-env)
+        docker push {{ dockerhub_image }}
       args:
         executable: /bin/bash
 
     - name: Deploy app using Kubernetes
       shell: |
-        eval $(minikube docker-env)
         cd /home/ubuntu/flask-app
-        kubectl apply -f k8s.yaml
+        kubectl --kubeconfig=/home/ubuntu/.kube/config apply -f k8s.yaml
       args:
         executable: /bin/bash
 
