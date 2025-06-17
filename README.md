@@ -20,7 +20,7 @@ This project demonstrates a complete **CI/CD pipeline** using **Git**, **Jenkins
 ---
 
 ## 🗂 Project Structure
-├── ansible
+├── ansible 
 │ ├── deploy.yaml # Ansible Playbook
 │ ├── inventory.ini # Inventory file with target server IP
 │ └── vars.yaml # Variables (Docker Hub credentials)
@@ -61,8 +61,4 @@ Follow the detailed SSH setup steps to enable password-less SSH between Jenkins 
 *(Refer to the Medium blog for complete steps.)*
 
 ---
-
----
-
-If you want, I can help you write the `vars.yaml` file or guide you to push this `README.md` to your GitHub repository. Let me know!
 
