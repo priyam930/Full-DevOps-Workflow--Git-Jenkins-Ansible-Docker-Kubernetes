@@ -1,6 +1,6 @@
 
 # Full DevOps Workflow: Git → Jenkins → Ansible → Docker → Kubernetes (Minikube)
-
+## LW_PROJECT_8
 This project demonstrates a complete **CI/CD pipeline** using **Git**, **Jenkins**, **Ansible**, **Docker Hub**, and **Kubernetes (Minikube)**. It automates the process of building, pushing, and deploying a Flask application using Jenkins and Ansible.
 
 ---
